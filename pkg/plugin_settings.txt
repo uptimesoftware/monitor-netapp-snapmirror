@@ -1,7 +1,7 @@
-name=NetApp SnapMirror & SnapVault
+name=NetApp SnapMirror
 version=1.0
 platforms=windows linux
-description=Monitor status & lags of NetApp SnapMirror & SnapVault
+description=Monitor status & lags of NetApp SnapMirror
 requiresAgentScript=false
 restartCore=false
 onUpgradeRemoveFiles=true

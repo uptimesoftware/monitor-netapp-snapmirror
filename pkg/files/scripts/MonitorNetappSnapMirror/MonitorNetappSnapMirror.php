@@ -1,5 +1,5 @@
 <?php
-	error_reporting(E_ERROR);
+	//error_reporting(E_ERROR);
 	$NetApp_Host = getenv('UPTIME_HOSTNAME');
 	$NetApp_Port = getenv('UPTIME_SNMP-PORT');
 	$NetApp_Community = getenv('UPTIME_READ-COMMUNITY');
@@ -32,6 +32,7 @@
 		$SMExcludeList = array_map('trim', $tmpSMExcludeList);
 	}
 	
+	/*
 	// SnapVault
 	$snapvaultFilterString=getenv('UPTIME_SVFILTERSTRING');
 	$snapvaultFilter=getenv('UPTIME_SVFILTEROPTION');
@@ -43,6 +44,7 @@
 		$tmpSVExcludeList = explode(',', $snapvaultFilterString);
 		$SVExcludeList = array_map('trim', $tmpSVExcludeList);
 	}
+	*/
 	
 	$NetApp_Connection_String = $NetApp_Host . ":" . $NetApp_Port;
 	
@@ -70,7 +72,7 @@
 		$snapmirrorLag = snmpwalk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.9.20.1.6", $SNMP_TIMEOUT );
 		$snapmirrorLag = parseTime($snapmirrorLag);
 		
-		
+		/*
 		$snapvault_src = snmpwalk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.19.11.1.2",$SNMP_TIMEOUT );
 		$snapvault_src_name = parseADDR($snapvault_src);
 		
@@ -82,6 +84,7 @@
 		
 		$snapvaultLag = snmpwalk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.19.11.1.6", $SNMP_TIMEOUT );
 		$snapvaultLag = parseTime($snapvaultLag);
+		*/
 		
 		$cifsStatus = snmpget($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.7.2.1.0", $SNMP_TIMEOUT );
 		$cifsStatus = parseData($cifsStatus);
@@ -105,6 +108,7 @@
 		$snapmirrorLag = snmp2_walk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.9.20.1.6", $SNMP_TIMEOUT );
 		$snapmirrorLag = parseTime($snapmirrorLag);		
 		
+		/*
 		$snapvault_src = snmp2_walk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.19.11.1.2",$SNMP_TIMEOUT );
 		$snapvault_src_name = parseADDR($snapvault_src);
 		
@@ -116,7 +120,8 @@
 		
 		$snapvaultLag = snmp2_walk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.19.11.1.6", $SNMP_TIMEOUT );
 		$snapvaultLag = parseTime($snapvaultLag);
-
+		*/
+		
 		// nodata
 		$cifsStatus = snmp2_get($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.7.2.1.0", $SNMP_TIMEOUT );
 		// has test data
@@ -170,7 +175,7 @@
 		$snapmirrorLag = snmp3_walk($NetApp_Connection_String,$SNMP_v3_agent,$SNMP_sec_level,$SNMP_v3_auth_type,$SNMP_v3_auth_pass,$SNMP_v3_priv_type,$SNMP_v3_priv_pass,"1.3.6.1.4.1.789.1.9.20.1.6", $SNMP_TIMEOUT );
 		$snapmirrorLag = parseTime($snapmirrorLag);
 		
-		
+		/*
 		$snapvault_src = snmp3_walk($NetApp_Connection_String,$SNMP_v3_agent,$SNMP_sec_level,$SNMP_v3_auth_type,$SNMP_v3_auth_pass,$SNMP_v3_priv_type,$SNMP_v3_priv_pass,"1.3.6.1.4.1.789.1.19.11.1.2",$SNMP_TIMEOUT );
 		$snapvault_src_name = parseADDR($snapvault_src);
 		
@@ -182,6 +187,7 @@
 		
 		$snapvaultLag = snmp3_walk($NetApp_Connection_String,$SNMP_v3_agent,$SNMP_sec_level,$SNMP_v3_auth_type,$SNMP_v3_auth_pass,$SNMP_v3_priv_type,$SNMP_v3_priv_pass,"1.3.6.1.4.1.789.1.19.11.1.6", $SNMP_TIMEOUT );
 		$snapvaultLag = parseTime($snapvaultLag);
+		*/
 		
 		$cifsStatus = snmp3_get($NetApp_Connection_String,$SNMP_v3_agent,$SNMP_sec_level,$SNMP_v3_auth_type,$SNMP_v3_auth_pass,$SNMP_v3_priv_type,$SNMP_v3_priv_pass,"1.3.6.1.4.1.789.1.7.2.1.0", $SNMP_TIMEOUT );
 		$cifsStatus = parseData($cifsStatus);
@@ -232,6 +238,7 @@ for($i=0; $i < $sm_count; $i++) {
 	}
 }
 
+/*
 $sv_count = count($snapvault_src_name);
 for($i=0; $i < $sv_count; $i++) {
 	$svFullName[$i] = $snapvault_src_name[$i] . "_" . $snapvault_dst_name[$i];
@@ -240,6 +247,7 @@ for($i=0; $i < $sv_count; $i++) {
 	$svFullName[$i] = str_replace(" ","_",$svFullName[$i]);
 	$svFullName[$i] = str_replace("/","_",$svFullName[$i]);
 	
+
 	//Output depending on filter option
 	if($snapvaultFilter == "None") {
 		echo $svFullName[$i] . "." . "snapvaultLag " . $snapvaultLag[$i] * 0.01 / 60 / 60 . "\n";
@@ -262,13 +270,12 @@ for($i=0; $i < $sv_count; $i++) {
 			echo $svFullName[$i] . "." . "snapvaultStatus " . $snapvaultStatus[$i] . "\n";
 		}
 	}
-	
 }
+*/
 
 if ($cifsStatus != "") {
 	echo "cifsStatus ".$cifsStatus."\n";
 }
-
 
 if ((!empty($SMIncludeList))||(!empty($SVIncludeList)))   {
 		
@@ -277,7 +284,6 @@ if ((!empty($SMIncludeList))||(!empty($SVIncludeList)))   {
 	echo "The following were not found but were specified in the include filter: ". $comma_separated;
 	exit(2);
 }
-
 
 
 function parseData($data) {

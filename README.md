@@ -1,4 +1,4 @@
-monitor-netapp-snapmirror-snapvault
+monitor-netapp-snapmirror
 ===================================
 
-Monitor NetApp SnapMirror SnapVault
+Monitor NetApp SnapMirror
