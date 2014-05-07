@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.uptimesoftware.com/erdc/erdc erdc"
-	xmlns="http://www.uptimesoftware.com/erdc/erdc"
-	xmlns:upt="http://www.uptimesoftware.com/erdc/erdc" version="4.0" target_grouping="other">
+<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" target_grouping="other">
     <class>NetApp SnapMirror</class>
 	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
 	<erdc_version>1.1</erdc_version>
@@ -221,6 +218,5 @@
             </gui_type>
         </element>
     </elements>
-    <help>Monitor status and lags of NetApp SnapMirror.
-    </help>
+    <help>Monitor status and lags of NetApp SnapMirror.</help>
 </uptime>
