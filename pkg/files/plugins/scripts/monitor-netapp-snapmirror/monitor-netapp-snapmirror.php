@@ -9,7 +9,6 @@
 	$SNMP_v3_auth_pass = getenv('UPTIME_AUTH-PASS');
 	$SNMP_v3_priv_type = getenv('UPTIME_PRIVACY-TYPE');
 	$SNMP_v3_priv_pass = getenv('UPTIME_PRIVACY-PASS');
-	$SNMP_Connection =  getenv('UPTIME_CONNECTION');
 	
 	// 20 second SNMP Timeout
 	$SNMP_TIMEOUT = 20000000;
@@ -60,10 +59,6 @@
 			echo "Please enter the SNMP community string.";
 			exit(2);
 		}
-		if ($SNMP_Connection=="") {
-			echo "Device Unavailable... Please Check your Connections.";
-			exit(2);
-		}
 
 		$snapmirror_src = snmpwalk($NetApp_Connection_String,$NetApp_Community,"1.3.6.1.4.1.789.1.9.20.1.2",$SNMP_TIMEOUT );
 		$snapmirror_src_name = parseADDR($snapmirror_src);
@@ -97,10 +92,6 @@
 	} elseif($SNMP_version == "v2") {
 		if ($NetApp_Community == "") {
 			echo "Please enter the SNMP community string.";
-			exit(2);
-		}
-		if ($SNMP_Connection=="") {
-			echo "Device Unavailable... Please Check your Connections.";
 			exit(2);
 		}
 		
@@ -142,10 +133,6 @@
 	
 		if ($SNMP_v3_agent == "") {
 			echo "Please enter the SNMP v3 username";
-			exit(2);
-		}
-		if ($SNMP_Connection=="") {
-			echo "Device Unavailable... Please Check your Connections.";
 			exit(2);
 		}
 	
